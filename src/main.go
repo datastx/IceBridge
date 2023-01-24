@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/datastx/IceBridge/src/server"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +12,7 @@ var snowflakeConn string
 var dbName string
 var configFile string
 
-func main() {
+func cli() error {
 	var rootCmd = &cobra.Command{
 		Use:   "connect",
 		Short: "connect to databases",
@@ -34,4 +35,10 @@ func main() {
 	rootCmd.MarkFlagRequired("config")
 
 	rootCmd.Execute()
+	return nil
+}
+
+func main() {
+	_ = cli()
+	server.Start()
 }
